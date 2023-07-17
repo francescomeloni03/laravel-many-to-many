@@ -28,7 +28,10 @@ class ProjectController extends Controller
      */
     public function create()
     {
-        return view("admin.projects.create");
+        $categories= Category::all();
+        $technologys= Technology::all();
+
+        return view("admin.projects.create", compact("categories", "technologys"));
     }
 
     /**
@@ -45,7 +48,7 @@ class ProjectController extends Controller
         $newProject->fill($data);
         $newProject->save();
 
-        return to_route("admin.projects.show", $newProject->id);
+        return to_route("admin.projects.show", $newProject);
     }
 
     /**
